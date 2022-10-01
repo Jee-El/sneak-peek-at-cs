@@ -95,3 +95,8 @@ print 'Popped last node? | return value : '
 puts linked_list.pop
 draw_linked_list_data(linked_list)
 puts
+
+print 'Out of bound index? | return value : '
+p linked_list.at(232)
+draw_linked_list_data(linked_list)
+puts

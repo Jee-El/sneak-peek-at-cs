@@ -31,6 +31,8 @@ class LinkedList
   end
 
   def at(index, current_node = head, current_index = index >= 0 ? 0 : -size)
+    return nil unless current_node
+
     return current_node if current_index == index
 
     at(index, current_node.next_node, current_index + 1)
