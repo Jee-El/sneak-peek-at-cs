@@ -11,9 +11,7 @@ class LinkedList
   def append(value)
     return (@head = @tail = Node.new(value)) && self unless @head
 
-    last_node = @head
-
-    last_node = last_node.next_node while last_node.next_node
+    last_node = at(-1)
 
     (@tail = last_node.next_node = Node.new(value)) && self
   end
