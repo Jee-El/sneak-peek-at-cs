@@ -48,36 +48,12 @@ class Tree
     [node.left, node.right].all?(&:nil?)
   end
 
-  def delete_leaf(leaf)
-    root = find_root(leaf.data)
-    root.left = root.right = nil
-    leaf
-  end
-
   def one_child?(node)
     [node.left, node.right].one?(&:nil?)
   end
 
-  def delete_node_of_1_child(child)
-    deleted_child = child
-
-    child.data = child.left&.data || child.right&.data
-
-    child.left = child.left&.left
-
-    child.right = child.right&.right
-
-    deleted_child
-  end
-
   def two_children?(node)
     [node.left, node.right].none?(&:nil?)
-  end
-
-  def delete_node_of_2_children(node)
-    successor_data = inorder_successor(node.right).data
-    delete(successor_data)
-    node.data = successor_data
   end
 
   def inorder_successor(node)
@@ -152,11 +128,6 @@ class Tree
     block[node]
   end
 
-  def no_block_given(_node = @root, values = [])
-    preorder { |node| values << node.data }
-    values
-  end
-
   def height(node, value = -1)
     return value unless node
 
@@ -190,5 +161,36 @@ class Tree
     new_arr = []
     inorder { |node| new_arr.push(node.data) }
     @root = build_tree(new_arr)
+  end
+
+  private
+
+  def delete_leaf(leaf)
+    root = find_root(leaf.data)
+    root.left = root.right = nil
+    leaf
+  end
+
+  def delete_node_of_1_child(child)
+    deleted_child = child
+
+    child.data = child.left&.data || child.right&.data
+
+    child.left = child.left&.left
+
+    child.right = child.right&.right
+
+    deleted_child
+  end
+
+  def delete_node_of_2_children(node)
+    successor_data = inorder_successor(node.right).data
+    delete(successor_data)
+    node.data = successor_data
+  end
+
+  def no_block_given(_node = @root, values = [])
+    preorder { |node| values << node.data }
+    values
   end
 end
