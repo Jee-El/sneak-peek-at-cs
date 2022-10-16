@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Tree
   def initialize(arr)
     arr = arr.sort.uniq
@@ -41,7 +43,8 @@ class Tree
     node = find(value)
     return delete_leaf(node) if leaf?(node)
     return delete_node_of_1_child(node) if one_child?(node)
-    return delete_node_of_2_children(node) if two_children?(node)
+
+    delete_node_of_2_children(node) if two_children?(node)
   end
 
   def leaf?(node)
@@ -189,8 +192,9 @@ class Tree
     node.data = successor_data
   end
 
-  def no_block_given(_node = @root, values = [])
-    preorder { |node| values << node.data }
-    values
+  def no_block_given
+    data = []
+    preorder { |node| data << node.data }
+    data
   end
 end
