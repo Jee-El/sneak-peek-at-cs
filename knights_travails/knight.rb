@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Knight
   attr_accessor :directions
 
