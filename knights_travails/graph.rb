@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Graph
   attr_reader :vertices, :adjacency_list
 
@@ -27,6 +29,12 @@ class Graph
     bfs(start, goal)
   end
 
+  def to_s
+    @adjacency_list.to_s
+  end
+
+  private
+
   def bfs(start, goal, paths = [[start]], vertices = [start])
     path = paths.shift
     vertex = vertices.shift
@@ -48,9 +56,5 @@ class Graph
 
   def invalid_coordinates
     puts 'Invalid coordinates'
-  end
-
-  def to_s
-    @adjacency_list.to_s
   end
 end
