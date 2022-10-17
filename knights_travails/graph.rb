@@ -35,19 +35,18 @@ class Graph
 
   private
 
-  def bfs(start, goal, paths = [[start]], vertices = [start])
-    path = paths.shift
-    vertex = vertices.shift
+  def bfs(start, goal, queue = [[start, [start]]], visited = [start])
+    vertex, path = queue.shift
     return path if vertex == goal
 
     @adjacency_list[vertex].each do |adjacent_vertex|
-      next if vertices.include?(adjacent_vertex)
+      next if visited.include?(adjacent_vertex)
 
+      visited << adjacent_vertex
       new_path = path + [adjacent_vertex]
-      paths.push(new_path)
-      vertices.push(adjacent_vertex)
+      queue << [adjacent_vertex, new_path]
     end
-    bfs(start, goal, paths, vertices)
+    bfs(start, goal, queue, visited)
   end
 
   def valid_coordinates?(*coordinates)
