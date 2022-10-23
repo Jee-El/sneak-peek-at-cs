@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'set'
+
 class Graph
   attr_reader :vertices, :adjacency_list
 
@@ -35,7 +37,7 @@ class Graph
 
   private
 
-  def bfs(start, goal, queue = [[start, [start]]], visited = [start])
+  def bfs(start, goal, queue = [[start, [start]]], visited = Set[start])
     vertex, path = queue.shift
     return path if vertex == goal
 
