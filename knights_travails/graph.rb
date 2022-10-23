@@ -11,10 +11,10 @@ class Graph
   def build_adjacency_list(moves)
     adjacency_list = {}
     @vertices.each do |vertex|
-      adjacent_vertices = moves.filter_map do |column, row|
-        column += vertex.first
-        row += vertex.last
-        [column, row] if valid_coordinates?(column, row)
+      adjacent_vertices = moves.filter_map do |row, column|
+        row += vertex.first
+        column += vertex.last
+        [row, column] if valid_coordinates?(row, column)
       end
       adjacency_list[vertex] = adjacent_vertices
     end

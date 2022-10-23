@@ -12,6 +12,4 @@ num_of_moves = shortest_path.length - 1
 
 puts "You made it in #{num_of_moves} moves!"
 
-shortest_path.each do |move|
-  puts "Col: #{move.first}, Row: #{move.last}"
-end
+shortest_path.each { |row, col| puts "Row: #{row}, Col: #{col}" }
